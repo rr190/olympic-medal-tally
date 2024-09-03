@@ -16,18 +16,6 @@ soup = BeautifulSoup(html, "html5lib")
 div_with_all_links = soup.find("div", {'class':'mw-category-group'})
 all_links = ["https://en.wikipedia.org" + item['href'] for item in div_with_all_links('a')]
 
-class eachMedalTable(NamedTuple):
-    country: str
-    gold: int
-    silver: int
-    bronze: int
-    total: int
-
-class AllTimeMedalTable(NamedTuple):
-    year: int
-    medalTable: list[eachMedalTable]
-
-
 all_countries = []
 all_years = []
 all_golds = []
@@ -46,11 +34,11 @@ for link in all_links:
     for i, table in enumerate(tables):
         test_string = table.find("caption")
         allMedalTable = []
-        # if test_string is not None and len(re.findall(regex, test_string.get_text())) > 0:
-        #     print(i)
+        
         data = [i for i in table("tr")]
 
-        test_data = data[0].find('th')
+        test_data = data[0].find('th') #tests whether it is the correct table
+        
         if test_data is not None and test_data.get_text().strip() == "Rank":
             year = int(link.split("/")[4][:4])
             print(year)
@@ -58,22 +46,19 @@ for link in all_links:
             for i in range(1, len(data)-1):
                 thead = data[i].find("th")
                 country = data[i].find("a").get_text()
-                all_years.append(year)
-                all_countries.append(country)
+                
 
                 #we only need the last 4
                 idx = len(data[i].find_all("td")) - 4
                 medals = [int(medal.get_text()) for medal in data[i].find_all("td")[idx:]]
-                mt = eachMedalTable(country, *medals)
-                allMedalTable.append(mt)
+
+                #adding the results
+                all_years.append(year)
+                all_countries.append(country)
                 all_golds.append(medals[0])
                 all_silvers.append(medals[1])
                 all_bronzes.append(medals[2])
                 all_totals.append(medals[3])
-
-
-            AllTimeMedalTable(year, allMedalTable)
-            year += 4
 
             break
 
@@ -87,4 +72,6 @@ result = {
 }
 
 df = pd.DataFrame(result)
+
+# saving the results into a CSV file
 df.to_csv("medalTable.csv")
