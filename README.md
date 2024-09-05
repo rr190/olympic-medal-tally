@@ -3,7 +3,7 @@
 ## 1. Introduction
 Inspired by this year's *Summer Olympics* (2024), this project focuses on parsing the **medal tally** and **number of events of each sport** included in all the *Summer Olympic*.
 
-<small>Note: 1916 was skipped as there was no *SummerOlympics*.</small>
+<small>Note: 1916 was skipped as there was no *Summer Olympics*.</small>
 
 ## 2. Technology Used
 * Python
