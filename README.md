@@ -11,10 +11,10 @@ Inspired by this year's *Summer Olympics* (2024), this project focuses on parsin
     * BeautifulSoup
 
 ## 3. Project Structure
-├── parser/            # Parser files
-├── README.md          # Project documentation
-├── medalTable.csv     # Data parsed
-├── eventsBySport.csv  # Data parsed
+├── parser/            # Parser files   <br /> 
+├── README.md          # Project documentation   <br /> 
+├── medalTable.csv     # Data parsed  <br /> 
+├── eventsBySport.csv  # Data parsed <br /> 
 
 # 4. Results
 * After running medalTable_parser.py, you will get medalTable.csv.
